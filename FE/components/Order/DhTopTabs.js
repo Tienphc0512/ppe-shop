@@ -96,6 +96,8 @@ export default function DhTopTabs({ orders, refreshing, onRefresh }) {
     switch (status) {
       case 'choxuly':
         return '#f39c12'; // Vàng
+      case 'dangchuanbi':
+        return '#8e44ad'; // Tím
       case 'danggiao':
         return '#3498db'; // Xanh dương
       case 'hoanthanh':
@@ -105,6 +107,7 @@ export default function DhTopTabs({ orders, refreshing, onRefresh }) {
     }
   };
 
+  //nhóm đơn hàng theo mã đơn cho những đơn nhiều sp
   const groupedOrders = orders.reduce((acc, item) => {
     const existing = acc.find(o => o.dathang_id === item.dathang_id);
     if (existing) {
@@ -134,6 +137,7 @@ export default function DhTopTabs({ orders, refreshing, onRefresh }) {
     return acc;
   }, []);
 
+  //xử lý checkbox để chọn đơn hàng
   const toggleExpand = (dathang_id) => {
     setExpandedOrders(prev =>
       prev.includes(dathang_id)
@@ -158,6 +162,8 @@ export default function DhTopTabs({ orders, refreshing, onRefresh }) {
             <Text style={{ color: '#fff', fontWeight: '600' }}>
               {item.trangthai === "choxuly"
                 ? "Chờ xử lý"
+                : item.trangthai === "dangchuanbi"
+                  ? "Đang chuẩn bị"
                 : item.trangthai === "danggiao"
                   ? "Đang giao"
                   : item.trangthai === "hoanthanh"

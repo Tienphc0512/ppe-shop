@@ -1,4 +1,4 @@
-package com.antiico.FE
+package com.ngociu.FE
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

@@ -1,4 +1,4 @@
-package com.antiico.FE
+package com.ngociu.FE
 
 import android.app.Application
 import android.content.res.Configuration

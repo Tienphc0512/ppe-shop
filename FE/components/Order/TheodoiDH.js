@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, ActivityIndicator } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { NavigationContainer, useRoute } from "@react-navigation/native";
+import { useNavigation , useRoute } from "@react-navigation/native";
 import { useAuth } from "../../context/Auth";
 import { fetchOrderDetails } from "../../service/api";
 import DhTopTabs from "./DhTopTabs"; 
@@ -16,6 +16,7 @@ export default function TheodoiDH() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const navigation = useNavigation();
 
   const loadOrders = async (id) => {
     try {
@@ -41,11 +42,20 @@ export default function TheodoiDH() {
 
   const initialTab = orderInfo
   ? orderInfo.trangthai === 'choxuly' ? 'Chờ xử lý' :
+    orderInfo.trangthai === 'dangchuanbi' ? 'Đang chuẩn bị' :
     orderInfo.trangthai === 'danggiao' ? 'Đang giao' :
     orderInfo.trangthai === 'hoanthanh' ? 'Đã giao' :
     orderInfo.trangthai === 'dahuy' ? 'Đã huỷ' :
     'Tất cả'
   : 'Tất cả';
+
+  // nhận params và điều tới tab chỉ định
+ useEffect(() => {
+    if (route.params?.targetTab) {
+      // Điều hướng tới tab  muốn
+      navigation.navigate(route.params.targetTab);
+    }
+  }, [route.params?.targetTab]);
 
 
   if (loading) {
@@ -83,35 +93,52 @@ export default function TheodoiDH() {
 >
   <Tab.Screen
     name="Tất cả"
-    children={() => <DhTopTabs orders={orders} 
-     refreshing={refreshing}
-        onRefresh={() => loadOrders(userId)}/>}
+     initialParams={{
+    orders: orders,
+    refreshing,
+    onRefresh: () => loadOrders(userId),
+  }}
   />
   <Tab.Screen
   name="Chờ xử lý"
-  children={() => <DhTopTabs orders={orders.filter(o => o.trangthai === "choxuly")} 
-   refreshing={refreshing}
-        onRefresh={() => loadOrders(userId)}/>}
+   initialParams={{
+    orders: orders.filter(o => o.trangthai === "choxuly"),
+    refreshing,
+    onRefresh: () => loadOrders(userId),
+  }}
+  />
+   <Tab.Screen
+  name="Đang chuẩn bị"
+   initialParams={{
+    orders: orders.filter(o => o.trangthai === "dangchuanbi"),
+    refreshing,
+    onRefresh: () => loadOrders(userId),
+  }}
   />
   <Tab.Screen
     name="Đang giao"
-    children={() => <DhTopTabs orders={orders.filter(o => o.trangthai === "danggiao")} 
-     refreshing={refreshing}
-        onRefresh={() => loadOrders(userId)}/>}
-
+     initialParams={{
+    orders: orders.filter(o => o.trangthai === "danggiao"),
+    refreshing,
+    onRefresh: () => loadOrders(userId),
+  }}
   />
     <Tab.Screen
     name="Đã giao"
-    children={() => <DhTopTabs orders={orders.filter(o => o.trangthai === "hoanthanh")} 
-     refreshing={refreshing}
-        onRefresh={() => loadOrders(userId)}/>}
+     initialParams={{
+    orders: orders.filter(o => o.trangthai === "hoanthanh"),
+    refreshing,
+    onRefresh: () => loadOrders(userId),
+  }}
 
   />
   <Tab.Screen
     name="Đã huỷ"
-    children={() => <DhTopTabs orders={orders.filter(o => o.trangthai === "dahuy")} 
-     refreshing={refreshing}
-        onRefresh={() => loadOrders(userId)}/>}
+     initialParams={{
+    orders: orders.filter(o => o.trangthai === "dahuy"),
+    refreshing,
+    onRefresh: () => loadOrders(userId),
+  }}
         />
 </Tab.Navigator>
 

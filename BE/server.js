@@ -606,7 +606,7 @@ JOIN nguoidung u ON u.id = dh.user_id
 LEFT JOIN diachi d ON d.id = dh.diachi_id
 
 WHERE dh.user_id = $1
-AND dh.trangthai IN ('choxuly', 'danggiao', 'hoanthanh', 'dahuy') 
+AND dh.trangthai IN ('choxuly', 'dangchuanbi', 'danggiao', 'hoanthanh', 'dahuy') 
 ORDER BY dh.ngaydat DESC
 
       `,

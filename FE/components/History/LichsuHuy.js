@@ -16,7 +16,7 @@ import { useRoute } from "@react-navigation/native";
 export default function DonHangDaHuy() {
   //lấy thông tin từ top tabs và hightlight
     const route = useRoute();
-  const { order, highlightId } = route.params || {};
+  const { highlightId } = route.params || {};
     const { token } = useAuth();
     const [orders, setOrders] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
@@ -97,111 +97,6 @@ const toggleExpand = (dathang_id) => {
       : [...prev, dathang_id]
   );
 };
-
-//    const renderItem = ({ item }) => {
-//   const sanpham = item.sanpham || [];
-//   const isExpanded = expandedOrders.includes(item.dathang_id);
-
-//   return (
-//     <View style={styles.orderItem}>
-//       <Text style={styles.orderCode}>Mã đơn: {item.dathang_id}</Text>
-
-//       {/* Hiển thị sản phẩm */}
-//       {sanpham.length === 1 ? (
-//         <View>
-//           <Text style={{ fontWeight: 'bold' }}>{sanpham[0].ten}</Text>
-//           <Text>Số lượng: {sanpham[0].soluong}</Text>
-//           <Text>Đơn giá: {Number(sanpham[0].dongia).toLocaleString()}đ</Text>
-//         </View>
-//       ) : (
-//         <View>
-//           <Text style={{ fontWeight: 'bold' }}>{sanpham[0].ten}</Text>
-//           <Text>Số lượng: {sanpham[0].soluong}</Text>
-//           <Text>Đơn giá: {Number(sanpham[0].dongia).toLocaleString()}đ</Text>
-
-//           {!isExpanded && <Text>...và {sanpham.length - 1} sản phẩm khác</Text>}
-
-//           {isExpanded &&
-//             sanpham.slice(1).map((sp, idx) => (
-//               <View key={idx + 1}>
-//                 <Text style={{ fontWeight: 'bold' }}>{sp.ten}</Text>
-//                 <Text>Số lượng: {sp.soluong}</Text>
-//                 <Text>Đơn giá: {Number(sp.dongia).toLocaleString()}đ</Text>
-//               </View>
-//             ))}
-
-//           <TouchableOpacity onPress={() => toggleExpand(item.dathang_id)}>
-//             <Text style={{ color: '#2980b9', marginTop: 4, textDecorationLine: 'underline' }}>
-//               {isExpanded ? 'Thu gọn' : 'Xem thêm'}
-//             </Text>
-//           </TouchableOpacity>
-//         </View>
-//       )}
-    
-//       <Text style={styles.infoText}>Tổng tiền: {Number(item.sanpham[0].tongtien).toLocaleString()}đ</Text>
-//       <Text style={styles.infoText}>Ngày huỷ: {new Date(item.ngayhuy).toLocaleString()}</Text>
-
-//       <TouchableOpacity onPress={() => showShippingInfo(item)}>
-//         <Text style={{ color: '#2980b9', marginTop: 10, fontWeight: 'bold' }}>
-//           Thông tin giao hàng
-//         </Text>
-//       </TouchableOpacity>
-
-//       <Text style={[styles.infoText, { color: '#e74c3c' }]}>Đơn hàng đã huỷ</Text>
-//     </View>
-//   );
-// };
-
-// const renderItem = ({ item }) => {
-//   const sanpham = item.sanpham || [];
-//   const isExpanded = expandedOrders.includes(item.dathang_id);
-//   const isHighlighted = item.dathang_id === highlightId; // check highlight
-//   return (
-//      <View style={[styles.orderItem, isHighlighted && styles.highlight]}>
-//       <View style={styles.header}>
-//         <Text style={styles.orderCode}>Mã đơn: {item.dathang_id}</Text>
-//         <View style={[styles.statusBadge, { backgroundColor: '#e74c3c' }]}>
-//           <Text style={styles.statusText}>Đã huỷ</Text>
-//         </View>
-//       </View>
-
-//       <View style={styles.productContainer}>
-//         {sanpham.slice(0, 1).map((sp, idx) => (
-//           <View key={idx} style={styles.productItem}>
-//             <Text style={styles.productName}>{sp.ten}</Text>
-//             <Text>x{sp.soluong} - {Number(sp.dongia).toLocaleString()}đ</Text>
-
-//           </View>
-//         ))}
-
-//         {sanpham.length > 1 && !isExpanded && (
-//           <Text style={styles.moreText}>...và {sanpham.length - 1} sản phẩm khác</Text>
-//         )}
-
-//         {isExpanded &&
-//           sanpham.slice(1).map((sp, idx) => (
-//             <View key={idx + 1} style={styles.productItem}>
-//               <Text style={styles.productName}>{sp.ten}</Text>
-//               <Text>x{sp.soluong} - {Number(sp.dongia).toLocaleString()}đ</Text>
-//             </View>
-//           ))}
-
-//         {sanpham.length > 1 && (
-//           <TouchableOpacity onPress={() => toggleExpand(item.dathang_id)}>
-//             <Text style={styles.toggleText}>{isExpanded ? 'Thu gọn' : 'Xem thêm'}</Text>
-//           </TouchableOpacity>
-//         )}
-//       </View>
-
-//       <Text style={styles.infoText}>Tổng tiền: {Number(item.sanpham[0].tongtien).toLocaleString()}đ</Text>
-//       <Text style={styles.infoText}>Ngày huỷ: {new Date(item.ngayhuy).toLocaleString()}</Text>
-//       <Text style={styles.infoText}>Lý do: {item.lydo || 'Không có'}</Text>
-//       <TouchableOpacity onPress={() => showShippingInfo(item)}>
-//         <Text style={styles.linkText}>Thông tin giao hàng</Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// };
 
 const renderItem = ({ item }) => {
   const sanpham = item.sanpham || [];

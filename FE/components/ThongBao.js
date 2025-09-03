@@ -41,9 +41,9 @@ export default function ThongBao() {
         style={[styles.item, isCancelled && styles.cancelledItem]}
         onPress={() => {
           if (isCancelled) {
-            navigation.navigate('Lịch sử hủy', { dathangId: item.dathang_id });
+            navigation.navigate('Lịch sử hủy', { highlightId: item.dathang_id });
           } else {
-            navigation.navigate('Đơn hàng', { dathangId: item.dathang_id });
+            navigation.navigate('Đơn hàng', { highlightId: item.dathang_id });
           }
         }}
       >

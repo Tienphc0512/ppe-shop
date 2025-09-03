@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.antiico.FE'
+    namespace 'com.ngociu.FE'
     defaultConfig {
-        applicationId 'com.antiico.FE'
+        applicationId 'com.ngociu.FE'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
