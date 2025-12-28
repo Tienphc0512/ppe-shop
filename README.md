@@ -1,6 +1,6 @@
 # PPE Marketplace App 🛡️🛒
 
-Ứng dụng thương mại điện tử bán **Personal Protective Equipment (PPE)** (đồ bảo hộ cá nhân) theo mô hình **marketplace tương tự Shopee**, tích hợp **AI Chatbot sử dụng Hugging Face** để hỗ trợ người dùng tra cứu thông tin, FAQ và tư vấn sản phẩm.
+Ứng dụng thương mại điện tử bán **Personal Protective Equipment (PPE)** (đồ bảo hộ cá nhân) theo mô hình **marketplace tương tự Shopee**, tích hợp **AI Chatbot sử dụng từ Hugging Face** để hỗ trợ người dùng tra cứu thông tin, FAQ và tư vấn sản phẩm.
 
 ---
 
@@ -21,30 +21,39 @@
 
 ---
 
-## 🧠 AI Technology
+## 🧠 AI Stack & Versions
 
-- Embedding Model: `thenlper/gte-small`
-- Chat Model: `microsoft/DialoGPT-small`
-- Vector similarity: Cosine Similarity
-- Lưu embedding vào PostgreSQL
-- Xử lý AI hoàn toàn local (không dùng API trả phí)
+### 🔹 Embedding Model
+- **Model name**: `thenlper/gte-small`
+- **Source**: Hugging Face
+- **Type**: Sentence Embedding
+- **Vector size**: 384
+- **Purpose**: Biến câu hỏi người dùng và FAQ thành vector để so sánh ngữ nghĩa
 
+### 🔹 Chat Model
+- **Model name**: `microsoft/DialoGPT-small`
+- **Source**: Hugging Face
+- **Type**: Causal Language Model
+- **Purpose**: Sinh phản hồi hội thoại cơ bản (fallback)
+
+### 🔹 Similarity Algorithm
+- **Method**: Cosine Similarity
+- **Threshold**: `0.75`
+- **Logic**:
+  - Nếu độ tương đồng ≥ threshold → trả lời FAQ
+  - Nếu < threshold → trả lời mặc định
 ---
 
-## 🏗️ System Architecture
+## 🧪 AI Framework & Environment
 
-FE (React Native - Expo)
-|
-| REST API
-v
-BE (Node.js - Express)
-|
-| HTTP
-v
-AI Service (Flask + Hugging Face)
-|
-v
-PostgreSQL
+- **Python**: 3.9+
+- **PyTorch**: ≥ 2.x
+- **Transformers**: ≥ 4.x
+- **NumPy**: ≥ 1.24
+- **Flask**: ≥ 2.x
+- **psycopg2**: PostgreSQL driver
+
+> AI service chạy **local**, tự load model từ Hugging Face, **không dùng OpenAI / API trả phí**.
 
 
 ---
